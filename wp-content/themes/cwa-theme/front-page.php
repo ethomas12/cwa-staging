@@ -1,23 +1,43 @@
 <?php
 /**
- * This file adds customizations to the front page template on the Milan Pro Theme.
+ * This file adds the Home Page to the Owner Direct Theme.
  *
- * @author Themetry
- * @package Milan
- * @subpackage Customizations
  */
 
-//* Add Featured Content widget area to blog index page
-add_action( 'genesis_after_header', 'milan_featured_content' );
-function milan_featured_content() {
-	if ( is_active_sidebar( 'featured-content' ) && ! is_page() ) {
-		echo '<div class="featured-area">';
-			dynamic_sidebar( 'featured-content' );
-		echo '</div>';
-	} elseif ( milan_has_enough_featured_posts() && ! is_active_sidebar( 'featured-content' ) && ! is_page() ) {
-		get_template_part( 'template-parts/jetpack-featured' );
-	}
+add_action( 'genesis_meta', 'starter_theme_home_genesis_meta' );
+function starter_theme_home_genesis_meta(){
+
 }
 
-//* Run the Genesis function
+//* Remove the default Genesis loop (don't do the posts)
+remove_action( 'genesis_loop', 'genesis_do_loop' );
+
+//* Force full width content layout
+add_filter( 'genesis_pre_get_option_site_layout', '__genesis_return_full_width_content' );
+
+add_action('genesis_after_header', 'add_home_page_widgets');
+function add_home_page_widgets() {
+  genesis_widget_area( 'home-widget-1', array(
+		'before' => '<div id="home-widget-1" class="home-widget-1 widget-area"><div class="wrap">',
+		'after'  => '</div></div>',
+  ) );
+  genesis_widget_area( 'home-widget-2', array(
+		'before' => '<div id="home-widget-2" class="home-widget-2 widget-area"><div class="wrap">',
+		'after'  => '</div></div>',
+  ) );
+  genesis_widget_area( 'home-widget-3', array(
+		'before' => '<div id="home-widget-3" class="home-widget-3 widget-area"><div class="wrap">',
+		'after'  => '</div></div>',
+  ) );
+  genesis_widget_area( 'home-widget-4', array(
+		'before' => '<div id="home-widget-4" class="home-widget-4 widget-area"><div class="wrap">',
+		'after'  => '</div></div>',
+  ) );
+  genesis_widget_area( 'home-widget-5', array(
+		'before' => '<div id="home-widget-5" class="home-widget-5 widget-area"><div class="wrap">',
+		'after'  => '</div></div>',
+  ) );
+}
+
 genesis();
+?>

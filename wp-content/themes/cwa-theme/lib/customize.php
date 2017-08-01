@@ -1,122 +1,80 @@
 <?php
+
 /**
- * Customizer additions.
+ * Customize Background Image Control Class
  *
- * @package Milan Pro
- * @author  Themetry
- * @link    http://my.studiopress.com/themes/milan/
- * @license GPL2-0+
+ * @package WordPress
+ * @subpackage Customize
+ * @since 3.4.0
  */
- 
-/**
- * Get default accent color for Customizer.
- *
- * Abstracted here since at least two functions use it.
- *
- * @since 1.0.0
- *
- * @return string Hex color code for accent color.
- */
-function milan_customizer_get_default_accent_color() {
-	return '#ffff00';
-}
+class ElevenOnline_Image_Control extends WP_Customize_Image_Control {
 
-add_action( 'customize_register', 'milan_customizer_register' );
+	/**
+	 * Constructor.
+	 *
+	 * If $args['settings'] is not defined, use the $id as the setting ID.
+	 *
+	 * @since 3.4.0
+	 * @uses WP_Customize_Upload_Control::__construct()
+	 *
+	 * @param WP_Customize_Manager $manager
+	 * @param string $id
+	 * @param array $args
+	 */
+	public function __construct( $manager, $id, $args ) {
+		$this->statuses = array( '' => __( 'No Image', '' ) );
 
-/**
- * Register settings and controls with the Customizer.
- *
- * @since 1.0.0
- * 
- * @param WP_Customize_Manager $wp_customize Customizer object.
- */
-function milan_customizer_register() {
+		parent::__construct( $manager, $id, $args );
 
-	global $wp_customize;
-	
-	$wp_customize->add_setting(
-		'milan_accent_color',
-		array(
-			'default' => milan_customizer_get_default_accent_color(),
-			'sanitize_callback' => 'sanitize_hex_color',
-		)
-	);
+		$this->add_tab( 'upload-new', __( 'Upload New', CHILD_THEME_NAME ), array( $this, 'tab_upload_new' ) );
+		$this->add_tab( 'uploaded',   __( 'Uploaded', CHILD_THEME_NAME ),   array( $this, 'tab_uploaded' ) );
 
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			'milan_accent_color',
-			array(
-			    'label'    => __( 'Accent Color', 'milan' ),
-				'description' => __( 'Change the default accent color for links and link borders.', 'milan' ),
-			    'section'  => 'colors',
-			    'settings' => 'milan_accent_color',
-			)
-		)
-	);
-
-}
-
-add_action( 'wp_enqueue_scripts', 'milan_css' );
-/**
-* Checks the settings for the accent color, highlight color, and header
-* If any of these value are set the appropriate CSS is output
-*
-* @since 1.0.0
-*/
-function milan_css() {
-
-	$handle  = defined( 'CHILD_THEME_NAME' ) && CHILD_THEME_NAME ? sanitize_title_with_dashes( CHILD_THEME_NAME ) : 'child-theme';
-
-	$color = get_theme_mod( 'milan_accent_color', milan_customizer_get_default_accent_color() );
-
-	$css = '';
-	
-	$css .= ( milan_customizer_get_default_accent_color() !== $color ) ? sprintf( '
-		.site-header,
-		.single .entry-title:before,
-		.comment-reply-title  {
-			background-color: %1$s;
-		}
-
-		.archive-pagination a,
-		.site-main #infinite-handle span button,
-		.site-main #infinite-handle span button:hover,
-		.site-main #infinite-handle span button:focus,
-		.archive-pagination a:before,
-		#infinite-handle button:before,
-		.main-navigation a,
-		.byline a,
-		.cat-links a,
-		.entry-content a,
-		.featured-primary .entry-excerpt a,
-		.post-navigation .nav-links a,
-		.comment-navigation a,
-		.comment-content a,
-		.comment-form a,
-		.comment-author span[itemprop="name"] a,
-		.widget a,
-		.site-footer p a,
-		.breadcrumb a,
-		.featured-row {
-			border-color: %1$s;
-		}
-		', $color ) : '';
-
-	if( $css ) {
-		wp_add_inline_style( $handle, $css );
+		// Early priority to occur before $this->manager->prepare_controls();
+		add_action( 'customize_controls_init', array( $this, 'prepare_control' ), 5 );
 	}
 
 }
 
-/**
- * Remove unwanted Customizer options
- *
- * @since 1.0.0
- * 
- */
-add_action( 'customize_register', 'milan_customize_register', 99 );
-function milan_customize_register( $wp_customize ) {
-	$wp_customize->remove_section( 'genesis_archives' );
-	$wp_customize->remove_control( 'blog_title' );
-}
+
+	global $wp_customize;
+
+	$wp_customize->add_section( 'eleven-online-settings', array(
+		'title'    => __( 'Custom Images', CHILD_THEME_NAME ),
+		'priority' => 35,
+	) );
+
+	$wp_customize->add_setting( 'home-widget-1-image', array(
+			'default'  => sprintf( '', get_stylesheet_directory_uri(), "" ),
+			'type'     => 'option',
+	) );
+
+	$wp_customize->add_control( new ElevenOnline_Image_Control( $wp_customize, 'home-widget-1-image', array(
+			'label'    => sprintf( __( 'Home Widget 1 Section Image:', CHILD_THEME_NAME ), "" ),
+			'section'  => 'eleven-online-settings',
+			'settings' => 'home-widget-1-image',
+			'priority' => 1,
+	) ) );
+
+	$wp_customize->add_setting( 'home-widget-4-image', array(
+			'default'  => sprintf( '', get_stylesheet_directory_uri(), "" ),
+			'type'     => 'option',
+	) );
+
+	$wp_customize->add_control( new ElevenOnline_Image_Control( $wp_customize, 'home-widget-4-image', array(
+			'label'    => sprintf( __( 'Home Widget 4 Section Image:', CHILD_THEME_NAME ), "" ),
+			'section'  => 'eleven-online-settings',
+			'settings' => 'home-widget-4-image',
+			'priority' => 1,
+	) ) );
+
+	$wp_customize->add_setting( 'blog-hero-image', array(
+			'default'  => sprintf( '', get_stylesheet_directory_uri(), "" ),
+			'type'     => 'option',
+	) );
+
+	$wp_customize->add_control( new ElevenOnline_Image_Control( $wp_customize, 'blog-hero-image', array(
+			'label'    => sprintf( __( 'Blog Hero Image:', CHILD_THEME_NAME ), "" ),
+			'section'  => 'eleven-online-settings',
+			'settings' => 'blog-hero-image',
+			'priority' => 1,
+	) ) );
