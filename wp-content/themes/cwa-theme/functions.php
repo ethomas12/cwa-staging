@@ -3,8 +3,8 @@
 include_once( get_template_directory() . '/lib/init.php' );
 
 //* Child theme (do not remove)
-define( 'CHILD_THEME_NAME', 'Theme Name' );
-define( 'CHILD_THEME_URL', 'http://www.11online.us/' );
+define( 'CHILD_THEME_NAME', 'CWA Theme' );
+define( 'CHILD_THEME_URL', 'http://www.infinite-possibilities.us/' );
 define( 'CHILD_THEME_VERSION', '2.2.2' );
 
 //* Enqueue Google Fonts
