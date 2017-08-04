@@ -4,7 +4,7 @@ include_once( get_template_directory() . '/lib/init.php' );
 
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'CWA Theme' );
-define( 'CHILD_THEME_URL', 'http://www.infinite-possibilities.us/' );
+define( 'CHILD_THEME_URL', 'http://www.11online.us/' );
 define( 'CHILD_THEME_VERSION', '2.2.2' );
 
 //* Enqueue Google Fonts
@@ -106,7 +106,7 @@ add_filter( 'excerpt_more', 'eleven_online_excerpt_more' );
 add_filter('genesis_footer_creds_text', 'sp_footer_creds_filter');
 function sp_footer_creds_filter($creds)
 {
-    $creds = 'Copyright '.date('Y').' -  CWA 7011 / Infinite Possibilities';
+    $creds = 'Copyright '.date('Y').' -  By CWA 7011 &middot; Infinite Possibilities';
 
     return $creds;
 }
