@@ -76,15 +76,15 @@ genesis_register_sidebar(array(
     'description' => __('Third widget on the home page', 'Starter Theme'),
 ));
 genesis_register_sidebar(array(
-    'id' => 'home-widget-4',
-    'name' => __('Home Widget 4', 'genesis'),
-    'description' => __('Fourth widget on the home page', 'Starter Theme'),
+    'id' => 'land-widget-1',
+    'name' => __('Land Widget 1', 'genesis'),
+    'description' => __('A widget for landing pages', 'Starter Theme'),
 ));
-genesis_register_sidebar(array(
-    'id' => 'home-widget-5',
-    'name' => __('Home Widget 5', 'genesis'),
-    'description' => __('Fifth widget on the home page', 'Starter Theme'),
-));
+//genesis_register_sidebar(array(
+//    'id' => 'home-widget-4',
+//    'name' => __('Home Widget 4', 'genesis'),
+//    'description' => __('Fourth widget on the home page', 'Starter Theme'),
+//));
 
 //* allow shortcodes in widgets
 add_filter('widget_text', 'do_shortcode');

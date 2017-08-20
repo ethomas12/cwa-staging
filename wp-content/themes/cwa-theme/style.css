@@ -1595,6 +1595,21 @@ li.comment {
       width: 100% !important;
       position: relative !important;
       padding-bottom: 50% !important; } }
+.home-widget-2 {
+  padding: 40px 0 48px; }
+
+@media only screen and (max-width: 960px) {
+  .site-header .wrap {
+    padding: 20px 5% 0; }
+    .site-header .wrap p {
+      margin: 0; } }
+.home input {
+  padding: 0;
+  width: 50%; }
+.home .button_div input.buttons {
+  width: 25%; }
+.home #home-widget-2 h3 {
+  color: white; }
 
 
 
