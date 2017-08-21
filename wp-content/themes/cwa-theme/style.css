@@ -1516,7 +1516,9 @@ li.comment {
   background: #333;
   color: #fff;
   text-align: center;
-  padding: 150px 0; }
+  padding: 50px 0; }
+  .home-widget-2 .one-third img {
+    height: 171px; }
   .home-widget-2 .widget-title {
     color: #fff; }
 
@@ -1595,14 +1597,13 @@ li.comment {
       width: 100% !important;
       position: relative !important;
       padding-bottom: 50% !important; } }
-.home-widget-2 {
-  padding: 40px 0 48px; }
-
 @media only screen and (max-width: 960px) {
   .site-header .wrap {
     padding: 20px 5% 0; }
     .site-header .wrap p {
       margin: 0; } }
+.home .home-widget-1 h1, .home .home-widget-1 h2, .home .home-widget-1 .entry-content {
+  color: white; }
 .home input {
   padding: 0;
   width: 50%; }
@@ -1610,6 +1611,20 @@ li.comment {
   width: 25%; }
 .home #home-widget-2 h3 {
   color: white; }
+
+.page-template-landing .site-inner {
+  max-width: none; }
+  .page-template-landing .site-inner .entry-content, .page-template-landing .site-inner .breadcrumb {
+    padding: 0 40px; }
+  .page-template-landing .site-inner article.entry:nth-of-type(1) {
+    padding: 50px 0; }
+.page-template-landing .land-widget-1 {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 40px 0 48px; }
+  .page-template-landing .land-widget-1 h3 {
+    color: white; }
 
 
 
